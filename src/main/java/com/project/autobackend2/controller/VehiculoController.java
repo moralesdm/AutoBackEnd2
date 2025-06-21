@@ -6,10 +6,9 @@ import com.project.autobackend2.service.VehiculoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/vehiculos")
@@ -22,5 +21,10 @@ public class VehiculoController {
     public ResponseEntity<VehiculoResponse> crearVehiculo(@RequestBody VehiculoRequest request) {
         VehiculoResponse vehiculo = vehiculoService.crearVehiculo(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(vehiculo);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<VehiculoResponse>> listarVehiculos() {
+        return ResponseEntity.ok(vehiculoService.listarVehiculos());
     }
 }

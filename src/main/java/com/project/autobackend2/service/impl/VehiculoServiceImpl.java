@@ -12,6 +12,8 @@ import com.project.autobackend2.service.VehiculoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class VehiculoServiceImpl implements VehiculoService {
@@ -52,5 +54,23 @@ public class VehiculoServiceImpl implements VehiculoService {
             .precioPorDia(categoria.getPrecio())
             .sucursal(sucursal.getNombre())
             .build();
+    }
+
+    @Override
+    public List<VehiculoResponse> listarVehiculos() {
+        return vehiculoRepository.findAll().stream()
+                .map(vehiculo -> VehiculoResponse.builder()
+                        .id(vehiculo.getId())
+                        .marca(vehiculo.getMarca())
+                        .modelo(vehiculo.getModelo())
+                        .tipo(vehiculo.getTipo())
+                        .anio(vehiculo.getAnio())
+                        .color(vehiculo.getColor())
+                        .disponible(vehiculo.getEstado())
+                        .categoria(vehiculo.getCategoria().getNombre())
+                        .precioPorDia(vehiculo.getCategoria().getPrecio())
+                        .sucursal(vehiculo.getSucursal().getNombre())
+                        .build())
+                .toList();
     }
 }

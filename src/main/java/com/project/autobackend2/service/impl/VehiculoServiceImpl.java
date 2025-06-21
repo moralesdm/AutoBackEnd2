@@ -5,6 +5,7 @@ import com.project.autobackend2.entity.Sucursal;
 import com.project.autobackend2.entity.Vehiculo;
 import com.project.autobackend2.entity.dto.VehiculoRequest;
 import com.project.autobackend2.entity.dto.VehiculoResponse;
+import com.project.autobackend2.entity.dto.VehiculoUpdateRequest;
 import com.project.autobackend2.repository.CategoriaRepository;
 import com.project.autobackend2.repository.SucursalRepository;
 import com.project.autobackend2.repository.VehiculoRepository;
@@ -73,4 +74,70 @@ public class VehiculoServiceImpl implements VehiculoService {
                         .build())
                 .toList();
     }
+
+    @Override
+    public VehiculoResponse obtenerVehiculoPorId(Long id) {
+        Vehiculo v = vehiculoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Vehículo no encontrado"));
+
+        return VehiculoResponse.builder()
+                .id(v.getId())
+                .marca(v.getMarca())
+                .modelo(v.getModelo())
+                .tipo(v.getTipo())
+                .anio(v.getAnio())
+                .color(v.getColor())
+                .disponible(v.getEstado())
+                .categoria(v.getCategoria().getNombre())
+                .precioPorDia(v.getCategoria().getPrecio())
+                .sucursal(v.getSucursal().getNombre())
+                .build();
+    }
+
+    @Override
+    public void eliminarVehiculo(Long id) {
+        Vehiculo v = vehiculoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Vehículo no encontrado"));
+
+        v.setEstado(false); // Soft delete
+        vehiculoRepository.save(v);
+    }
+
+    @Override
+    public VehiculoResponse actualizarVehiculo(Long id, VehiculoUpdateRequest request) {
+        Vehiculo v = vehiculoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Vehículo no encontrado"));
+
+        if (request.getMarca() != null) v.setMarca(request.getMarca());
+        if (request.getModelo() != null) v.setModelo(request.getModelo());
+        if (request.getTipo() != null) v.setTipo(request.getTipo());
+        if (request.getAnio() != null) v.setAnio(request.getAnio());
+        if (request.getColor() != null) v.setColor(request.getColor());
+
+        if (request.getCategoriaId() != null) {
+            Categoria categoria = categoriaRepository.findById(request.getCategoriaId())
+                    .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
+            v.setCategoria(categoria);
+        }
+
+        if (request.getSucursalId() != null) {
+            Sucursal sucursal = sucursalRepository.findById(request.getSucursalId())
+                    .orElseThrow(() -> new RuntimeException("Sucursal no encontrada"));
+            v.setSucursal(sucursal);
+        }
+
+        return VehiculoResponse.builder()
+                .id(v.getId())
+                .marca(v.getMarca())
+                .modelo(v.getModelo())
+                .tipo(v.getTipo())
+                .anio(v.getAnio())
+                .color(v.getColor())
+                .disponible(v.getEstado())
+                .categoria(v.getCategoria().getNombre())
+                .precioPorDia(v.getCategoria().getPrecio())
+                .sucursal(v.getSucursal().getNombre())
+                .build();
+    }
+
 }

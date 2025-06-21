@@ -12,7 +12,7 @@ public class VehiculoResponse {
     private String marca;
     private String modelo;
     private String tipo;
-    private int anio;
+    private String anio;
     private String color;
     private boolean disponible;
     private String categoria;

@@ -1,4 +1,4 @@
-package com.project.autobackend2.entity.dto;
+package com.project.autobackend2.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

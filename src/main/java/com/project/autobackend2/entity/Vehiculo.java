@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -26,4 +29,7 @@ public class Vehiculo {
     private Categoria categoria;
     @ManyToOne
     private Sucursal sucursal;
+    @ManyToMany
+    @JoinTable(name = "vehiculo_caracteristica")
+    private List<Caracteristica> caracteristicas = new ArrayList<>();
 }

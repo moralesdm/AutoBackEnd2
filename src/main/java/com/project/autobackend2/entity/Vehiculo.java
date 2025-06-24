@@ -25,6 +25,8 @@ public class Vehiculo {
     private String tipo;
     private String anio;
     private Boolean estado;
+    @Column(length = 512)
+    private String imagenUrl;
     @ManyToOne
     private Categoria categoria;
     @ManyToOne

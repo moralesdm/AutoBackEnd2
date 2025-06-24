@@ -14,6 +14,7 @@ public class VehiculoResponse {
     private String tipo;
     private String anio;
     private String color;
+    private String imagenUrl;
     private boolean disponible;
     private String categoria;
     private BigDecimal precioPorDia; // ← proviene de la categoría

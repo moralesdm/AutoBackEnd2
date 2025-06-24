@@ -9,6 +9,7 @@ public class VehiculoUpdateRequest {
     private String tipo;
     private String anio;
     private String color;
+    private String imagenUrl;
     private Long categoriaId;
     private Long sucursalId;
 }

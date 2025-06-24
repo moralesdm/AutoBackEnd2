@@ -36,6 +36,7 @@ public class VehiculoServiceImpl implements VehiculoService {
             .tipo(request.getTipo())
             .anio(request.getAnio())
             .color(request.getColor())
+            .imagenUrl(request.getImagenUrl())
             .categoria(categoria)
             .sucursal(sucursal)
             .estado(true)
@@ -50,6 +51,7 @@ public class VehiculoServiceImpl implements VehiculoService {
             .tipo(vehiculo.getTipo())
             .anio(vehiculo.getAnio())
             .color(vehiculo.getColor())
+            .imagenUrl(vehiculo.getImagenUrl())
             .disponible(vehiculo.getEstado())
             .categoria(categoria.getNombre())
             .precioPorDia(categoria.getPrecio())
@@ -67,6 +69,7 @@ public class VehiculoServiceImpl implements VehiculoService {
                         .tipo(vehiculo.getTipo())
                         .anio(vehiculo.getAnio())
                         .color(vehiculo.getColor())
+                        .imagenUrl(vehiculo.getImagenUrl())
                         .disponible(vehiculo.getEstado())
                         .categoria(vehiculo.getCategoria().getNombre())
                         .precioPorDia(vehiculo.getCategoria().getPrecio())
@@ -87,6 +90,7 @@ public class VehiculoServiceImpl implements VehiculoService {
                 .tipo(v.getTipo())
                 .anio(v.getAnio())
                 .color(v.getColor())
+                .imagenUrl(v.getImagenUrl())
                 .disponible(v.getEstado())
                 .categoria(v.getCategoria().getNombre())
                 .precioPorDia(v.getCategoria().getPrecio())
@@ -113,6 +117,7 @@ public class VehiculoServiceImpl implements VehiculoService {
         if (request.getTipo() != null) v.setTipo(request.getTipo());
         if (request.getAnio() != null) v.setAnio(request.getAnio());
         if (request.getColor() != null) v.setColor(request.getColor());
+        if (request.getImagenUrl() != null) v.setImagenUrl(request.getImagenUrl());
 
         if (request.getCategoriaId() != null) {
             Categoria categoria = categoriaRepository.findById(request.getCategoriaId())
@@ -133,6 +138,7 @@ public class VehiculoServiceImpl implements VehiculoService {
                 .tipo(v.getTipo())
                 .anio(v.getAnio())
                 .color(v.getColor())
+                .imagenUrl(v.getImagenUrl())
                 .disponible(v.getEstado())
                 .categoria(v.getCategoria().getNombre())
                 .precioPorDia(v.getCategoria().getPrecio())

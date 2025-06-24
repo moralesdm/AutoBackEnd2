@@ -21,5 +21,5 @@ public class Sucursal {
     private String nombre;
     private String direccion;
     private String ciudad;
-    private BigDecimal pais;
+    private String pais;
 }
